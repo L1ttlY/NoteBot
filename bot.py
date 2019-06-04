@@ -1,5 +1,4 @@
 import telebot
-import time
 
 bot_token = '764198186:AAGPu1-Bc8gVQDmL1ZO0sTgHkV8bLmjv2DU'
 
