@@ -1,6 +1,6 @@
-import telebot, requests
+import telebot
+import requests
 from telebot import types
-
 
 
 bot_token = '764198186:AAGPu1-Bc8gVQDmL1ZO0sTgHkV8bLmjv2DU'
@@ -23,52 +23,56 @@ def send_features(message):
     bot.reply_to(message, 'In the future i would be able to send notes')
 
 
+@bot.message_handler(commands=['test'])
+def test_send_photo(message):
+    bot.send_photo(chat_id=message.chat.id,
+                   photo='https://images.unsplash.com/photo-1531804055935-76f44d7c3621?ixlib=rb-1.2.1&ixid''='
+                         'eyJhcHBfaWQiOjEyMDd9&w=1000&q=80')
+
+
 @bot.message_handler(commands=['harmonica'])
 def send_note_harmonica(message):
-    bot.reply_to(message, 'At the moment, sheet music is only available for the following musical compositions: /Godfather, /March_of_Mendelssohn and /Imperial_march. Please press the name of the musical composition of the note you would like to know. Soon we will use API and there will be much more sheet music availible.')
+    bot.reply_to(message, 'At the moment, sheet music is only available for the following musical compositions:\n'
+                          '/Godfather /March_of_Mendelssohn and /Imperial_march.\n'
+                          'Please press the name of the musical composition of the note you would like to know.\n'
+                          'Soon we will use API and there will be much more sheet music available.')
 
 
 @bot.message_handler(commands=['Godfather'])
 def send_link(message):
         keyboard = types.InlineKeyboardMarkup()
-        url_button = types.InlineKeyboardButton(text="Перейти на сайт с нотами", url="https://antropinum.ru/tabs/13430")
+        url_button = types.InlineKeyboardButton(text="Go to website with notes", url="https://antropinum.ru/tabs/13430")
         keyboard.add(url_button)
-        bot.send_message(message.chat.id, "Привет! Нажми на кнопку и перейди на сайт с нотами.", reply_markup=keyboard)
+        bot.send_message(message.chat.id, "Hello! You can see the notes by clicking on the button below =)",
+                         reply_markup=keyboard)
+
+
 @bot.message_handler(commands=['Imperial_march'])
 def send_link(message):
         keyboard = types.InlineKeyboardMarkup()
-        url_button = types.InlineKeyboardButton(text="Перейти на сайт с нотами", url="https://antropinum.ru/tabs/12574")
+        url_button = types.InlineKeyboardButton(text="Go to website with notes", url="https://antropinum.ru/tabs/12574")
         keyboard.add(url_button)
-        bot.send_message(message.chat.id, "Привет! Нажми на кнопку и перейди на сайт с нотами.", reply_markup=keyboard)
+        bot.send_message(message.chat.id, "Hello! You can see the notes by clicking on the button below =)",
+                         reply_markup=keyboard)
+
+
 @bot.message_handler(commands=['March_of_Mendelssohn'])
 def send_link(message):
         keyboard = types.InlineKeyboardMarkup()
-        url_button = types.InlineKeyboardButton(text="Перейти на сайт с нотами", url="https://antropinum.ru/tabs/12678")
+        url_button = types.InlineKeyboardButton(text="Go to website with notes", url="https://antropinum.ru/tabs/12678")
         keyboard.add(url_button)
-        bot.send_message(message.chat.id, "Привет! Нажми на кнопку и перейди на сайт с нотами.", reply_markup=keyboard)
+        bot.send_message(message.chat.id, "Hello! You can see the notes by clicking on the button below =)",
+                         reply_markup=keyboard)
+
 
 @bot.message_handler(content_types=['text'])
 def send_text(message):
     if message.text.lower() == 'hello':
-        bot.send_message(message.chat.id, 'Hello world!')
-    elif message.text.lower() == 'buy':
-        bot.send_message(message.chat.id, 'Buy')
+        bot.send_message(message.chat.id, 'Hello my friend!')
+    elif message.text.lower() == 'bye':
+        bot.send_message(message.chat.id, 'Bye! Hope to see you soon again =)')
     elif message.text.lower() == 'i love you':
         bot.send_sticker(message.chat.id, 'CAADAgADZgkAAnlc4gmfCor5YbYYRAI')
-    #elif message.text.lower() == 'godfather':   #я хочу что бы "godfather" вводилась как обычное сообщение а не команда, но в этом виде оно не работает
-     #   def send_link(message):
-      #      keyboard = types.InlineKeyboardMarkup()
-       #     url_button = types.InlineKeyboardButton(text="Перейти на сайт с нотами", url="https://antropinum.ru/tabs/13430")
-        #    keyboard.add(url_button)
-         #   bot.send_message(message.chat.id, "Привет! Нажми на кнопку и перейди на сайт с нотами.", reply_markup=keyboard)
-
-
-
-
-
-
-
-
 
 
 bot.polling()
