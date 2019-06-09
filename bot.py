@@ -18,7 +18,7 @@ def send_welcome(message):
 
 @bot.message_handler(commands=['help'])
 def send_help(message):
-    bot.send_message(message.chat.id, 'All commands: /features, /start, /help, /harmonica')
+    bot.send_message(message.chat.id, 'All commands: /features, /start, /help, /harmonica, /songs')
 
 
 @bot.message_handler(commands=['features'])
@@ -49,54 +49,35 @@ def send_note_harmonica(message):
 # SONGS
 
 
-@bot.message_handler(commands=['Godfather'])
-def send_link(message):
-        keyboard = types.InlineKeyboardMarkup()
-        url_button = types.InlineKeyboardButton(text="Go to website with notes", url="https://www.harmonica.com/the-godfather-by-nino-rota-1822.html")
-        keyboard.add(url_button)
-        bot.send_message(message.chat.id, "Hello! You can see the notes by clicking on the button below =)",
-                         reply_markup=keyboard,)
-        bot.send_photo(chat_id=message.chat.id,
-                       photo='https://pp.userapi.com/c855016/v855016562/65c9f/40Nph1jK3UI.jpg')
-        # test photo, tabs are different
 
 
-@bot.message_handler(commands=['Imperial_march'])
-def send_link(message):
-        keyboard = types.InlineKeyboardMarkup()
-        url_button = types.InlineKeyboardButton(text="Go to website with notes", url="https://www.harmonica.com/darth-vader-imperial-march-by-john-williams-1788.html")
-        keyboard.add(url_button)
-        bot.send_message(message.chat.id, "Hello! You can see the notes by clicking on the button below =)",
-                         reply_markup=keyboard)
-        bot.send_photo(chat_id=message.chat.id,
-                       photo='https://pp.userapi.com/c855016/v855016562/65c7c/Ptv2M44sAXE.jpg')
+
+def send_all(message, url_id, photo_id):
+    keyboard = types.InlineKeyboardMarkup()
+    url_button = types.InlineKeyboardButton(text="Go to website with notes",
+                                            url=url_id)
+    keyboard.add(url_button)
+    bot.send_message(message.chat.id, "Hello! You can see the notes by clicking on the button below =)",
+                     reply_markup=keyboard)
+    bot.send_photo(chat_id=message.chat.id,
+                   photo=photo_id)
 
 
-@bot.message_handler(commands=['March_of_Mendelssohn'])
-def send_link(message):
-        keyboard = types.InlineKeyboardMarkup()
-        url_button = types.InlineKeyboardButton(text="Go to website with notes", url="https://antropinum.ru/tabs/12678")
-        keyboard.add(url_button)
-        bot.send_message(message.chat.id, "Hello! You can see the notes by clicking on the button below =)",
-                         reply_markup=keyboard)
-        bot.send_photo(chat_id=message.chat.id,
-                       photo='https://pp.userapi.com/c855016/v855016562/65c8a/dzXxnAyQ054.jpg')
 
-
-@bot.message_handler(commands=['Dancing_in_the_Dark'])
-def send_link(message):
-        keyboard = types.InlineKeyboardMarkup()
-        url_button = types.InlineKeyboardButton(text="Go to website with notes", url="https://www.harmonica.com/dancing-in-the-dark-by-bruce-springsteen-2559.html")
-        keyboard.add(url_button)
-        bot.send_message(message.chat.id, "Hello! You can see the notes by clicking on the button below =)",
-                         reply_markup=keyboard)
-        bot.send_photo(chat_id=message.chat.id,
-                       photo='https://pp.userapi.com/c855016/v855016562/65c56/ZFSjdEnIiEg.jpg')
 
 
 
 
 # TEXT FEATURES
+@bot.message_handler(commands=['songs'])
+def handle_start(message):
+    markup = types.ReplyKeyboardMarkup()
+    markup.row('Godfather', 'Imperial march')
+    markup.row('March of mendelssohn', 'Dancing in the dark')
+    bot.send_message(message.chat.id, "Choose one song:", reply_markup=markup)
+
+
+
 
 
 @bot.message_handler(content_types=['text'])
@@ -107,6 +88,15 @@ def send_text(message):
         bot.send_message(message.chat.id, 'Bye! Hope to see you soon again =)')
     elif message.text.lower() == 'i love you':
         bot.send_sticker(message.chat.id, 'CAADAgADZgkAAnlc4gmfCor5YbYYRAI')
+    elif message.text.lower() == 'godfather':
+        data = send_all(message, "https://www.harmonica.com/the-godfather-by-nino-rota-1822.html", 'https://pp.userapi.com/c855016/v855016562/65c9f/40Nph1jK3UI.jpg')
+    elif message.text.lower() == 'imperial march':
+        data = send_all(message, "https://www.harmonica.com/darth-vader-imperial-march-by-john-williams-1788.html", 'https://pp.userapi.com/c855016/v855016562/65c7c/Ptv2M44sAXE.jpg')
+    elif message.text.lower() == 'march of mendelssohn':
+        data = send_all(message, "https://antropinum.ru/tabs/12678", 'https://pp.userapi.com/c855016/v855016562/65c8a/dzXxnAyQ054.jpg')
+    elif message.text.lower() == 'dancing in the dark':
+        data = send_all(message, "https://www.harmonica.com/dancing-in-the-dark-by-bruce-springsteen-2559.html", 'https://pp.userapi.com/c855016/v855016562/65c56/ZFSjdEnIiEg.jpg')
+
 
 
 
