@@ -15,6 +15,7 @@ def send_welcome(message):
     bot.send_message(message.chat.id, 'Hi! I am NoteBot - telegram bot that can send notes for musical instruments =)')
 
 
+
 @bot.message_handler(commands=['help'])
 def send_help(message):
     bot.send_message(message.chat.id, 'All commands: /features, /start, /help, /harmonica')
@@ -36,10 +37,13 @@ def test_send_photo(message):
 def send_note_harmonica(message):
     bot.send_message(message.chat.id, 'At the moment,'
                                       ' sheet music is only available for the following musical compositions:\n'
-                                      '/Godfather /March_of_Mendelssohn and /Imperial_march.\n'
+                                      '/Godfather /March_of_Mendelssohn /Dancing_in_the_Dark and /Imperial_march.\n'
                                       'Please press'
                                       ' the name of the musical composition of the note you would like to know.\n'
                                       'Soon we will use API and there will be much more sheet music available.')
+
+
+
 
 
 # SONGS
@@ -48,22 +52,24 @@ def send_note_harmonica(message):
 @bot.message_handler(commands=['Godfather'])
 def send_link(message):
         keyboard = types.InlineKeyboardMarkup()
-        url_button = types.InlineKeyboardButton(text="Go to website with notes", url="https://antropinum.ru/tabs/13430")
+        url_button = types.InlineKeyboardButton(text="Go to website with notes", url="https://www.harmonica.com/the-godfather-by-nino-rota-1822.html")
         keyboard.add(url_button)
         bot.send_message(message.chat.id, "Hello! You can see the notes by clicking on the button below =)",
                          reply_markup=keyboard,)
         bot.send_photo(chat_id=message.chat.id,
-                       photo='http://www.moosevilleusa.com/uploads/6/7/5/9/6759109/5958355_orig.jpg')
+                       photo='https://pp.userapi.com/c855016/v855016562/65c9f/40Nph1jK3UI.jpg')
         # test photo, tabs are different
 
 
 @bot.message_handler(commands=['Imperial_march'])
 def send_link(message):
         keyboard = types.InlineKeyboardMarkup()
-        url_button = types.InlineKeyboardButton(text="Go to website with notes", url="https://antropinum.ru/tabs/12574")
+        url_button = types.InlineKeyboardButton(text="Go to website with notes", url="https://www.harmonica.com/darth-vader-imperial-march-by-john-williams-1788.html")
         keyboard.add(url_button)
         bot.send_message(message.chat.id, "Hello! You can see the notes by clicking on the button below =)",
                          reply_markup=keyboard)
+        bot.send_photo(chat_id=message.chat.id,
+                       photo='https://pp.userapi.com/c855016/v855016562/65c7c/Ptv2M44sAXE.jpg')
 
 
 @bot.message_handler(commands=['March_of_Mendelssohn'])
@@ -73,6 +79,22 @@ def send_link(message):
         keyboard.add(url_button)
         bot.send_message(message.chat.id, "Hello! You can see the notes by clicking on the button below =)",
                          reply_markup=keyboard)
+        bot.send_photo(chat_id=message.chat.id,
+                       photo='https://pp.userapi.com/c855016/v855016562/65c8a/dzXxnAyQ054.jpg')
+
+
+@bot.message_handler(commands=['Dancing_in_the_Dark'])
+def send_link(message):
+        keyboard = types.InlineKeyboardMarkup()
+        url_button = types.InlineKeyboardButton(text="Go to website with notes", url="https://www.harmonica.com/dancing-in-the-dark-by-bruce-springsteen-2559.html")
+        keyboard.add(url_button)
+        bot.send_message(message.chat.id, "Hello! You can see the notes by clicking on the button below =)",
+                         reply_markup=keyboard)
+        bot.send_photo(chat_id=message.chat.id,
+                       photo='https://pp.userapi.com/c855016/v855016562/65c56/ZFSjdEnIiEg.jpg')
+
+
+
 
 # TEXT FEATURES
 
@@ -85,6 +107,7 @@ def send_text(message):
         bot.send_message(message.chat.id, 'Bye! Hope to see you soon again =)')
     elif message.text.lower() == 'i love you':
         bot.send_sticker(message.chat.id, 'CAADAgADZgkAAnlc4gmfCor5YbYYRAI')
+
 
 
 bot.polling()
