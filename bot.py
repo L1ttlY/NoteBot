@@ -23,21 +23,14 @@ def send_help(message):
 
 @bot.message_handler(commands=['features'])
 def send_features(message):
-    bot.send_message(message.chat.id, 'In the future i would be able to send notes')
-
-
-@bot.message_handler(commands=['test'])
-def test_send_photo(message):
-    bot.send_photo(chat_id=message.chat.id,
-                   photo='https://images.unsplash.com/photo-1531804055935-76f44d7c3621?ixlib=rb-1.2.1&ixid''='
-                         'eyJhcHBfaWQiOjEyMDd9&w=1000&q=80')
+    bot.send_message(message.chat.id, 'I can send musical notes, but their number is limited because I do not use API at the moment.')
 
 
 @bot.message_handler(commands=['harmonica'])
 def send_note_harmonica(message):
     bot.send_message(message.chat.id, 'At the moment,'
                                       ' sheet music is only available for the following musical compositions:\n'
-                                      '/Godfather /March_of_Mendelssohn /Dancing_in_the_Dark and /Imperial_march.\n'
+                                      'Godfather, March of Mendelssohn, Dancing in the Dark, Imperial march and Dancing in the dark.\n'
                                       'Please press'
                                       ' the name of the musical composition of the note you would like to know.\n'
                                       'Soon we will use API and there will be much more sheet music available.')
@@ -73,7 +66,7 @@ def send_all(message, url_id, photo_id):
 def handle_start(message):
     markup = types.ReplyKeyboardMarkup()
     markup.row('Godfather', 'Imperial march')
-    markup.row('March of mendelssohn', 'Dancing in the dark')
+    markup.row('March of Mendelssohn', 'Dancing in the dark')
     bot.send_message(message.chat.id, "Choose one song:", reply_markup=markup)
 
 
