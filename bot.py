@@ -1,5 +1,4 @@
 import telebot
-import requests
 from telebot import types
 
 
@@ -8,19 +7,22 @@ bot_token = '764198186:AAGPu1-Bc8gVQDmL1ZO0sTgHkV8bLmjv2DU'
 bot = telebot.TeleBot(token=bot_token)
 
 
+# COMMANDS
+
+
 @bot.message_handler(commands=['start'])
 def send_welcome(message):
-    bot.reply_to(message, 'Hi! I am NoteBot - telegram bot that can send notes for musical instruments =)')
+    bot.send_message(message.chat.id, 'Hi! I am NoteBot - telegram bot that can send notes for musical instruments =)')
 
 
 @bot.message_handler(commands=['help'])
 def send_help(message):
-    bot.reply_to(message, 'All commands: /features, /start, /help, /harmonica')
+    bot.send_message(message.chat.id, 'All commands: /features, /start, /help, /harmonica')
 
 
 @bot.message_handler(commands=['features'])
 def send_features(message):
-    bot.reply_to(message, 'In the future i would be able to send notes')
+    bot.send_message(message.chat.id, 'In the future i would be able to send notes')
 
 
 @bot.message_handler(commands=['test'])
@@ -32,10 +34,15 @@ def test_send_photo(message):
 
 @bot.message_handler(commands=['harmonica'])
 def send_note_harmonica(message):
-    bot.reply_to(message, 'At the moment, sheet music is only available for the following musical compositions:\n'
-                          '/Godfather /March_of_Mendelssohn and /Imperial_march.\n'
-                          'Please press the name of the musical composition of the note you would like to know.\n'
-                          'Soon we will use API and there will be much more sheet music available.')
+    bot.send_message(message.chat.id, 'At the moment,'
+                                      ' sheet music is only available for the following musical compositions:\n'
+                                      '/Godfather /March_of_Mendelssohn and /Imperial_march.\n'
+                                      'Please press'
+                                      ' the name of the musical composition of the note you would like to know.\n'
+                                      'Soon we will use API and there will be much more sheet music available.')
+
+
+# SONGS
 
 
 @bot.message_handler(commands=['Godfather'])
@@ -44,7 +51,10 @@ def send_link(message):
         url_button = types.InlineKeyboardButton(text="Go to website with notes", url="https://antropinum.ru/tabs/13430")
         keyboard.add(url_button)
         bot.send_message(message.chat.id, "Hello! You can see the notes by clicking on the button below =)",
-                         reply_markup=keyboard)
+                         reply_markup=keyboard,)
+        bot.send_photo(chat_id=message.chat.id,
+                       photo='http://www.moosevilleusa.com/uploads/6/7/5/9/6759109/5958355_orig.jpg')
+        # test photo, tabs are different
 
 
 @bot.message_handler(commands=['Imperial_march'])
@@ -63,6 +73,8 @@ def send_link(message):
         keyboard.add(url_button)
         bot.send_message(message.chat.id, "Hello! You can see the notes by clicking on the button below =)",
                          reply_markup=keyboard)
+
+# TEXT FEATURES
 
 
 @bot.message_handler(content_types=['text'])
