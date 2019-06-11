@@ -13,7 +13,8 @@ bot = telebot.TeleBot(token=bot_token)
 
 @bot.message_handler(commands=['start'])
 def send_welcome(message):
-    bot.send_message(message.chat.id, 'Hi! I am NoteBot - telegram bot that can send notes for musical instruments =)')
+    bot.send_message(message.chat.id, 'Hi! I am NoteBot - telegram bot that can send notes for musical instruments =)\n'
+                                      'Type /help to see all available commands')
 
 
 @bot.message_handler(commands=['help'])
@@ -74,6 +75,9 @@ def handle_start(message):
     markup = types.ReplyKeyboardMarkup()
     markup.row('Godfather', 'Imperial march')
     markup.row('March of Mendelssohn', 'Dancing in the dark')
+    markup.row('Jingle Bells', 'Twinkle Twinkle Little Star')
+    markup.row('I Believe I Can Fly', 'Smells Like Teen Spirit')
+    markup.row('Nothing Else Matters', 'What a Wonderful World')
     bot.send_message(message.chat.id, "Choose one song:", reply_markup=markup)
 
 
@@ -105,6 +109,30 @@ def send_text(message):
     elif message.text.lower() == 'godfather':
         data = send_all(message, "https://www.harmonica.com/the-godfather-by-nino-rota-1822.html",
                         'https://pp.userapi.com/c855016/v855016562/65c9f/40Nph1jK3UI.jpg')
+    elif message.text.lower() == 'jingle bells':
+        data = send_all(message, "https://www.harmonica.com/jingle-bells-by-unknown-2014.html",
+                        "https://pp.userapi.com/c855020/v855020705/646ce/ans525gkw9Y.jpg")
+    elif message.text.lower() == 'twinkle twinkle little star':
+        data = send_all(message, 'https://www.harmonica.com/'
+                                 'free-harmonica-tabs-for-twinkle-twinkle-little-star-by-unknown-2668.html',
+                        'https://pp.userapi.com/c855020/v855020705/6471f/IUJbtHUhsLQ.jpg')
+    elif message.text.lower() == 'i believe i can fly':
+        data = send_all_2_photos(message, "https://www.harmonica.com/i-believe-i-can-fly-by-r-kelly-2519.html",
+                                 "https://pp.userapi.com/c855020/v855020705/647bd/LHSUBcErS48.jpg",
+                                 "https://pp.userapi.com/c855020/v855020705/647c4/MP5H6pr9qD4.jpg")
+    elif message.text.lower() == 'smells like teen spirit':
+        data = send_all_2_photos(message, "https://www.harmonica.com/smells-like-teen-spirit-by-nirvana-1654.html",
+                                 "https://pp.userapi.com/c855020/v855020705/647e7/B0OxD97lpK4.jpg",
+                                 "https://pp.userapi.com/c855020/v855020705/647ee/jCFkL41HF5k.jpg")
+    elif message.text.lower() == 'nothing else matters':
+        data = send_all_2_photos(message, "https://www.harmonica.com/nothing-else-matters-by-metallica-2234.html",
+                                 "https://pp.userapi.com/c855020/v855020705/647ff/WZ3SWdIVHDw.jpg",
+                                 "https://pp.userapi.com/c855020/v855020705/64807/jbetMMai3Bk.jpg")
+    elif message.text.lower() == 'what a wonderful world':
+        data = send_all_2_photos(message, "https://www.harmonica.com/"
+                                          "what-a-wonderful-world-by-louis-armstrong-1660.html",
+                                 "https://pp.userapi.com/c855020/v855020965/68290/yX3T5B5hrUQ.jpg",
+                                 "https://pp.userapi.com/c855020/v855020965/68298/v4tcQppfE3g.jpg")
     elif message.text.lower() == 'imperial march':
         data = send_all(message, "https://www.harmonica.com/darth-vader-imperial-march-by-john-williams-1788.html",
                         'https://pp.userapi.com/c855016/v855016562/65c7c/Ptv2M44sAXE.jpg')
