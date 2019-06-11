@@ -1,5 +1,4 @@
-import telebot
-import emoji
+import telebot, emoji
 from telebot import types
 
 
@@ -86,6 +85,10 @@ def handle_start(message):
     markup = types.ReplyKeyboardMarkup()
     markup.row(emoji.emojize('Godfather :musical_keyboard:'),
                emoji.emojize('Chopin - Prelude in E minor Op.28 No.4 :musical_keyboard:'))
+    markup.row(emoji.emojize('The Entertainer :musical_keyboard:'),
+               emoji.emojize('Greensleeves :musical_keyboard:'))
+    markup.row(emoji.emojize('Fur Elise :musical_keyboard:'),
+               emoji.emojize('Por Una Cabeza :musical_keyboard:'))
     bot.send_message(message.chat.id, "Choose one song:", reply_markup=markup)
 
 
@@ -149,6 +152,9 @@ def send_text(message):
         data = send_all_2_photos(message, "https://www.8notes.com/scores/9765.asp",
                                  'https://pp.userapi.com/c849128/v849128883/1ae7ba/ybJz0QyhPkI.jpg',
                                  'https://pp.userapi.com/c849128/v849128883/1ae7c2/NLK3jqJlT5U.jpg')
+    elif message.text.lower() == emoji.emojize('the entertainer :musical_keyboard:'):
+        data = send_all(message, "https://www.8notes.com/scores/13178.asp",
+                        'https://pp.userapi.com/c855016/v855016676/67f99/q7O2R9p_0QE.jpg')
     elif message.text.lower() == emoji.emojize('godfather :guitar:'):
         data = send_all(message, "https://tabs.ultimate-guitar.com/tab/nino_rota/godfather_tabs_334933",
                         'https://pp.userapi.com/c849128/v849128448/1afa7b/B-xtBwHf29M.jpg')
@@ -157,6 +163,18 @@ def send_text(message):
                                           "aladdin_-_a_whole_new_world_tabs_342734",
                                  'https://pp.userapi.com/c849128/v849128883/1ae75f/oTGYubndX-Y.jpg',
                                  'https://pp.userapi.com/c849128/v849128883/1ae766/eU9PDwMkRS4.jpg')
+    elif message.text.lower() == emoji.emojize('greensleeves :musical_keyboard:'):
+        data = send_all(message, "https://www.8notes.com/scores/12179.asp",
+                        'https://pp.userapi.com/c855016/v855016676/67fd2/fSkZHXx4Bm0.jpg')
+    elif message.text.lower() == emoji.emojize('fur elise :musical_keyboard:'):
+        data = send_all_2_photos(message, "https://www.8notes.com/scores/457.asp",
+                                 'https://pp.userapi.com/c855016/v855016676/67fda/51NKeBRAfe4.jpg',
+                                 'https://pp.userapi.com/c855016/v855016676/67fe2/7ycehEkbaj0.jpg')
+    elif message.text.lower() == emoji.emojize('por una cabeza :musical_keyboard:'):
+        data = send_all_2_photos(message, "https://www.8notes.com/scores/18093.asp",
+                                 'https://pp.userapi.com/c855016/v855016046/6814b/BNBvI6jIDgA.jpg',
+                                 'https://pp.userapi.com/c855016/v855016046/68143/O04hvB7UFyQ.jpg')
+
 
 
 bot.polling()
